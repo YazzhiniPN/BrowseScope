@@ -16,9 +16,9 @@ export default function HistoryTable() {
   }, [search, category]);
 
   return (
-    <div className="card">
+    <div className="card enter">
       <h3>Search & Filter History</h3>
-      <div style={{ display: 'flex', gap: 10, marginBottom: 14 }}>
+      <div className="toolbar">
         <input
           placeholder="Search title or URL…"
           value={search}
@@ -32,31 +32,33 @@ export default function HistoryTable() {
         </select>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Domain</th>
-            <th>Category</th>
-            <th>Visited</th>
-          </tr>
-        </thead>
-        <tbody>
-          {visits.map((v) => (
-            <tr key={v.visitId}>
-              <td>
-                <a href={v.url} target="_blank" rel="noreferrer" style={{ color: '#93c5fd' }}>
-                  {v.title || v.url}
-                </a>
-              </td>
-              <td>{v.domain}</td>
-              <td>{v.category}</td>
-              <td>{new Date(v.visitTimeEpochMillis).toLocaleString()}</td>
+      <div className="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Domain</th>
+              <th>Category</th>
+              <th>Visited</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      {visits.length === 0 && <p style={{ color: '#999' }}>No visits match your filters.</p>}
+          </thead>
+          <tbody>
+            {visits.map((v) => (
+              <tr key={v.visitId}>
+                <td>
+                  <a href={v.url} target="_blank" rel="noreferrer">
+                    {v.title || v.url}
+                  </a>
+                </td>
+                <td>{v.domain}</td>
+                <td><span className={`badge badge-${v.category}`}>{v.category}</span></td>
+                <td>{new Date(v.visitTimeEpochMillis).toLocaleString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {visits.length === 0 && <p className="empty-state">No visits match your filters.</p>}
     </div>
   );
 }

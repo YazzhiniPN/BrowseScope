@@ -23,15 +23,15 @@ export default function NavigationGraph() {
   const { flowNodes, flowEdges } = useMemo(() => layout(graph), [graph]);
 
   return (
-    <div className="card" style={{ height: 560 }}>
+    <div className="card enter" style={{ height: 560 }}>
       <h3>Navigation Graph — your browsing "rabbit holes"</h3>
-      <p style={{ color: '#999', fontSize: '0.85rem', marginTop: -6 }}>
+      <p className="muted" style={{ marginTop: -6 }}>
         Each node is a site you visited; an arrow means you navigated from one to the
         other. Thicker/more frequent transitions mean you made that jump more often.
       </p>
-      <div style={{ height: 460 }}>
+      <div className="graph-wrap" style={{ height: 460 }}>
         <ReactFlow nodes={flowNodes} edges={flowEdges} fitView>
-          <Background color="#2a2d3a" gap={16} />
+          <Background color="var(--border)" gap={16} />
           <Controls />
         </ReactFlow>
       </div>

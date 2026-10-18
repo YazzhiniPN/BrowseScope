@@ -15,6 +15,13 @@ const CATEGORY_COLORS = {
   other: '#6b7280'
 };
 
+const tooltipStyle = {
+  background: 'var(--surface)',
+  border: '1px solid var(--border)',
+  borderRadius: 8,
+  color: 'var(--text)'
+};
+
 export default function Dashboard() {
   const [domainStats, setDomainStats] = useState([]);
   const [daily, setDaily] = useState({});
@@ -39,37 +46,37 @@ export default function Dashboard() {
   return (
     <div>
       {productivity && (
-        <div className="card">
+        <div className="card enter">
           <h3>Productivity Score</h3>
           <div className="score-circle" style={{ color: scoreColor(productivity.overallScore) }}>
             {productivity.overallScore.toFixed(1)} / 100
           </div>
-          <p style={{ color: '#999', fontSize: '0.85rem' }}>
+          <p className="muted">
             Based on the mix of productive, educational, social, and entertainment sites you visited.
           </p>
         </div>
       )}
 
       <div className="grid-2">
-        <div className="card">
+        <div className="card enter enter-delay-1">
           <h3>Browsing Activity Over Time</h3>
           <ResponsiveContainer width="100%" height={220}>
             <LineChart data={dailyData}>
-              <XAxis dataKey="day" stroke="#888" fontSize={11} />
-              <YAxis stroke="#888" fontSize={11} />
-              <Tooltip contentStyle={{ background: '#171923', border: '1px solid #2a2d3a' }} />
-              <Line type="monotone" dataKey="count" stroke="#3b82f6" strokeWidth={2} dot={false} />
+              <XAxis dataKey="day" stroke="var(--text-muted)" fontSize={11} />
+              <YAxis stroke="var(--text-muted)" fontSize={11} />
+              <Tooltip contentStyle={tooltipStyle} />
+              <Line type="monotone" dataKey="count" stroke="var(--accent)" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="card">
+        <div className="card enter enter-delay-2">
           <h3>Hourly Usage Pattern</h3>
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={hourlyData}>
-              <XAxis dataKey="hour" stroke="#888" fontSize={9} interval={2} />
-              <YAxis stroke="#888" fontSize={11} />
-              <Tooltip contentStyle={{ background: '#171923', border: '1px solid #2a2d3a' }} />
+              <XAxis dataKey="hour" stroke="var(--text-muted)" fontSize={9} interval={2} />
+              <YAxis stroke="var(--text-muted)" fontSize={11} />
+              <Tooltip contentStyle={tooltipStyle} />
               <Bar dataKey="count" fill="#38bdf8" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
@@ -77,19 +84,19 @@ export default function Dashboard() {
       </div>
 
       <div className="grid-2">
-        <div className="card">
+        <div className="card enter enter-delay-3">
           <h3>Top Domains</h3>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={topDomains} layout="vertical" margin={{ left: 40 }}>
-              <XAxis type="number" stroke="#888" fontSize={11} />
-              <YAxis type="category" dataKey="domain" stroke="#888" fontSize={10} width={120} />
-              <Tooltip contentStyle={{ background: '#171923', border: '1px solid #2a2d3a' }} />
+              <XAxis type="number" stroke="var(--text-muted)" fontSize={11} />
+              <YAxis type="category" dataKey="domain" stroke="var(--text-muted)" fontSize={10} width={120} />
+              <Tooltip contentStyle={tooltipStyle} />
               <Bar dataKey="visitCount" fill="#22c55e" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="card">
+        <div className="card enter enter-delay-4">
           <h3>Category Breakdown</h3>
           <ResponsiveContainer width="100%" height={260}>
             <PieChart>
@@ -99,7 +106,7 @@ export default function Dashboard() {
                 ))}
               </Pie>
               <Legend />
-              <Tooltip contentStyle={{ background: '#171923', border: '1px solid #2a2d3a' }} />
+              <Tooltip contentStyle={tooltipStyle} />
             </PieChart>
           </ResponsiveContainer>
         </div>

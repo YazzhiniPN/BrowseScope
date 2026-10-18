@@ -21,17 +21,22 @@ export default function UploadHistory({ onLoaded }) {
   }
 
   return (
-    <div className="card">
+    <div className="card enter">
       <div className="upload-box">
         <p><strong>Load your browsing history</strong></p>
-        <p style={{ fontSize: '0.85rem' }}>
+        <p className="muted">
           Copy your browser's <code>History</code> file (Chrome/Edge, close the browser
           first) and upload it below. Everything is parsed locally by your own backend —
           nothing is sent anywhere else.
         </p>
         <input type="file" onChange={handleFile} disabled={loading} />
-        {loading && <p>Parsing…</p>}
-        {error && <p style={{ color: '#f87171' }}>{error}</p>}
+        {loading && (
+          <p className="loading-status">
+            <span className="spinner" aria-hidden="true" />
+            Parsing…
+          </p>
+        )}
+        {error && <p className="error-text">{error}</p>}
       </div>
     </div>
   );
