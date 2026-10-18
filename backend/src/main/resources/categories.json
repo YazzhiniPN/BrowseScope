@@ -1,0 +1,40 @@
+{
+  "categories": {
+    "productive": [
+      "github.com", "stackoverflow.com", "docs.google.com", "notion.so",
+      "leetcode.com", "geeksforgeeks.org", "developer.mozilla.org",
+      "overleaf.com", "jira.atlassian.com", "confluence.atlassian.com",
+      "colab.research.google.com", "jenkins.io", "kubernetes.io",
+      "coursera.org", "udemy.com", "khanacademy.org"
+    ],
+    "educational": [
+      "wikipedia.org", "scholar.google.com", "arxiv.org", "w3schools.com",
+      "geeksforgeeks.org", "medium.com", "towardsdatascience.com"
+    ],
+    "social": [
+      "facebook.com", "instagram.com", "twitter.com", "x.com",
+      "reddit.com", "linkedin.com", "whatsapp.com", "snapchat.com",
+      "discord.com"
+    ],
+    "entertainment": [
+      "youtube.com", "netflix.com", "primevideo.com", "hotstar.com",
+      "spotify.com", "twitch.tv", "9gag.com"
+    ],
+    "shopping": [
+      "amazon.com", "amazon.in", "flipkart.com", "myntra.com", "ebay.com"
+    ],
+    "news": [
+      "news.google.com", "bbc.com", "cnn.com", "timesofindia.indiatimes.com",
+      "thehindu.com", "ndtv.com"
+    ]
+  },
+  "categoryWeights": {
+    "productive": 1.0,
+    "educational": 0.8,
+    "news": 0.3,
+    "shopping": -0.2,
+    "social": -0.6,
+    "entertainment": -0.8,
+    "other": 0.0
+  }
+}

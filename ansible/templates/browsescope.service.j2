@@ -1,0 +1,13 @@
+[Unit]
+Description=BrowseScope Backend
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/browsescope
+ExecStart=/usr/bin/java -jar /opt/browsescope/browsescope-backend.jar
+Restart=on-failure
+User=ubuntu
+
+[Install]
+WantedBy=multi-user.target

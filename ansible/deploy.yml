@@ -1,0 +1,48 @@
+---
+- name: Deploy BrowseScope backend
+  hosts: app_servers
+  become: yes
+
+  vars:
+    app_dir: /opt/browsescope
+    jar_name: browsescope-backend.jar
+
+  tasks:
+    - name: Ensure Java 17 is installed
+      apt:
+        name: openjdk-17-jre-headless
+        state: present
+        update_cache: yes
+
+    - name: Create application directory
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy backend jar to target node
+      copy:
+        src: ../backend/target/{{ jar_name }}
+        dest: "{{ app_dir }}/{{ jar_name }}"
+        mode: '0755'
+
+    - name: Install systemd service file
+      template:
+        src: templates/browsescope.service.j2
+        dest: /etc/systemd/system/browsescope.service
+        mode: '0644'
+      notify: restart browsescope
+
+    - name: Ensure service is enabled and started
+      systemd:
+        name: browsescope
+        enabled: yes
+        state: started
+        daemon_reload: yes
+
+  handlers:
+    - name: restart browsescope
+      systemd:
+        name: browsescope
+        state: restarted
+        daemon_reload: yes

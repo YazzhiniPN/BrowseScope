@@ -1,0 +1,19 @@
+# Backend
+backend/target/
+*.class
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Never commit browsing data (anchored to project root so source files aren't matched)
+/History
+/History-copy
+*.sqlite
+*.db
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
