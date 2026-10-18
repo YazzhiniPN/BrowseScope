@@ -1,17 +1,15 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/YazzhiniPN/BrowseScope.git'
-            }
-        }
+    environment {
+        PATH = "E:\\apache-maven-3.9.16-bin\\apache-maven-3.9.16\\bin;${env.PATH}"
+    }
 
+    stages {
         stage('Build Backend (Maven)') {
             steps {
                 dir('backend') {
-                    bat 'mvn clean package -DskipTests=false'
+                    bat 'mvn clean package'
                 }
             }
         }
@@ -22,16 +20,16 @@ pipeline {
             }
         }
 
-        stage('Deploy via Ansible') {
-            steps {
-                // Jenkins runs on Windows; Ansible lives in WSL2, so shell out into it.
-                bat 'wsl ansible-playbook -i ansible/inventory.ini ansible/deploy.yml'
-            }
-        }
+        // Re-enable once ansible-playbook works manually from WSL
+        // stage('Deploy via Ansible') {
+        //     steps {
+        //         bat 'wsl ansible-playbook -i ansible/inventory.ini ansible/deploy.yml'
+        //     }
+        // }
     }
 
     post {
-        success { echo 'BrowseScope backend built and deployed successfully.' }
+        success { echo 'BrowseScope backend built successfully.' }
         failure { echo 'Pipeline failed - check the stage logs above.' }
     }
 }
